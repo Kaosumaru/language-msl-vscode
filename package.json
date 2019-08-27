@@ -1,0 +1,25 @@
+{
+    "name": "msl",
+    "displayName": "MSL",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.37.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "msl",
+            "aliases": ["MSL", "msl"],
+            "extensions": [".msl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "msl",
+            "scopeName": "source.msl",
+            "path": "./syntaxes/msl.tmLanguage.json"
+        }]
+    }
+}

@@ -1,0 +1,56 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "MSL",
+	"patterns": [
+		{
+			"include": "#value"
+		}
+	],
+	"repository": {
+		"value": {
+			"patterns": [{ "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }]
+		},
+		"simple_string": {
+			"name": "string.unquoted.msl",
+			"match": "(?x:(\\w|&)(\\w|!|\\.|-|<|>|\\\\|\\/|_)*)"
+		},
+		"string": {
+			"name": "string.quoted.double.msl",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.msl",
+					"match": "\\\\."
+				}
+			]
+		},
+		"array": {
+			"name": "meta.structure.array.msl",
+			"begin": "\\[",
+			"beginCaptures": {
+				"0": {"name":"punctuation.definition.array.begin.msl" }
+			},
+			"end": "\\]",
+			"endCaptures": {
+				"0": {"name":"punctuation.definition.array.end.msl" }
+			},
+			"patterns": [
+				{ "include": "#value" },
+				{
+					"match": ",",
+					"name": "punctuation.separator.array.msl"
+				}
+			]
+		},
+		"constant": {
+			"match": "\\b(?:true|false|null)\\b",
+			"name": "constant.language.msl"
+		},
+		"number": {
+			"name": "constant.numeric.msl",
+			"match": "(?x:-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?)"
+		}		
+	},
+	"scopeName": "source.msl"
+}
