@@ -8,7 +8,7 @@
 	],
 	"repository": {
 		"value": {
-			"patterns": [{ "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }]
+			"patterns": [{ "include": "#object" }, { "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }]
 		},
 		"simple_string": {
 			"name": "string.unquoted.msl",
@@ -40,6 +40,35 @@
 				{
 					"match": ",",
 					"name": "punctuation.separator.array.msl"
+				}
+			]
+		},
+		"object": {
+			"name": "meta.structure.dictionary.msl",
+			"comment": "slightly wrong, because commas are optional",
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {"name":"punctuation.definition.dictionary.begin.msl" }
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {"name":"punctuation.definition.dictionary.end.msl" }
+			},
+			"patterns": [
+				{ "comment": "key", "include": "#value" },
+				{
+					"name": "meta.structure.dictionary.value.msl",
+					"begin": ":",
+					"beginCaptures": {
+						"0": {"name":"punctuation.separator.dictionary.key-value.msl" }
+					},
+					"end": "(,)|(?=\\})",
+					"endCaptures": {
+						"1": {"name":"punctuation.separator.dictionary.pair.msl" }
+					},
+					"patterns": [
+						{ "comment": "object value", "include": "#value" }
+					]
 				}
 			]
 		},
