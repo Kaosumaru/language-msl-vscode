@@ -37,15 +37,12 @@
 			},
 			"patterns": [
 				{ "include": "#value" },
-				{
-					"match": ",",
-					"name": "punctuation.separator.array.msl"
-				}
+				{ "include": "#punctuation-comma" }
 			]
 		},
 		"object": {
 			"name": "meta.structure.dictionary.msl",
-			"comment": "slightly wrong, because commas are optional",
+			"comment": "slightly wrong, because we aren't parsing keys&values as separate things",
 			"begin": "\\{",
 			"beginCaptures": {
 				"0": {"name":"punctuation.definition.dictionary.begin.msl" }
@@ -56,20 +53,8 @@
 			},
 			"patterns": [
 				{ "comment": "key", "include": "#value" },
-				{
-					"name": "meta.structure.dictionary.value.msl",
-					"begin": ":",
-					"beginCaptures": {
-						"0": {"name":"punctuation.separator.dictionary.key-value.msl" }
-					},
-					"end": "(,)|(?=\\})",
-					"endCaptures": {
-						"1": {"name":"punctuation.separator.dictionary.pair.msl" }
-					},
-					"patterns": [
-						{ "comment": "object value", "include": "#value" }
-					]
-				}
+				{ "include": "#punctuation-comma" },
+				{ "include": "#punctuation-colon" }
 			]
 		},
 		"constant": {
@@ -79,7 +64,15 @@
 		"number": {
 			"name": "constant.numeric.msl",
 			"match": "(?x:-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?)"
-		}		
+		},
+		"punctuation-comma": {
+			"name": "punctuation.separator.comma.msl",
+			"match": ","
+		},
+		"punctuation-colon": {
+			"name": "punctuation.separator.colon.msl",
+			"match": ":"
+		}
 	},
 	"scopeName": "source.msl"
 }
