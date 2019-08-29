@@ -14,6 +14,11 @@
 			"name": "string.unquoted.msl",
 			"match": "(?x:(\\w|&)(\\w|!|\\.|-|<|>|\\\\|\\/|_)*)"
 		},
+		"simple_string_key": {
+			"comment": "simple string as key in object",
+			"name": "support.type.property-name.msl",
+			"match": "(?x:(\\w|&)(\\w|!|\\.|-|<|>|\\\\|\\/|_)*:)"
+		},
 		"string": {
 			"name": "string.quoted.double.msl",
 			"begin": "\"",
@@ -25,6 +30,18 @@
 				}
 			]
 		},
+		"string_key": {
+			"name": "support.type.property-name.msl",
+			"begin": "\"",
+			"end": "\":",
+			"patterns": [
+				{
+					"name": "constant.character.escape.msl",
+					"match": "\\\\."
+				}
+			]
+		},
+
 		"array": {
 			"name": "meta.structure.array.msl",
 			"begin": "\\[",
@@ -52,6 +69,8 @@
 				"0": {"name":"punctuation.definition.dictionary.end.msl" }
 			},
 			"patterns": [
+				{ "comment": "key", "include": "#simple_string_key" },
+				{ "comment": "key", "include": "#string_key" },
 				{ "comment": "key", "include": "#value" },
 				{ "include": "#punctuation-comma" },
 				{ "include": "#punctuation-colon" }
