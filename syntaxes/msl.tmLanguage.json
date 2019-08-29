@@ -8,7 +8,7 @@
 	],
 	"repository": {
 		"value": {
-			"patterns": [{ "include": "#object" }, { "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }]
+			"patterns": [{ "include": "#object" }, { "include": "#dictionary" }, { "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }]
 		},
 		"simple_string": {
 			"name": "string.unquoted.msl",
@@ -57,7 +57,7 @@
 				{ "include": "#punctuation-comma" }
 			]
 		},
-		"object": {
+		"dictionary": {
 			"name": "meta.structure.dictionary.msl",
 			"comment": "slightly wrong, because we aren't parsing keys&values as separate things",
 			"begin": "\\{",
@@ -67,6 +67,25 @@
 			"end": "\\}",
 			"endCaptures": {
 				"0": {"name":"punctuation.definition.dictionary.end.msl" }
+			},
+			"patterns": [
+				{ "comment": "key", "include": "#simple_string_key" },
+				{ "comment": "key", "include": "#string_key" },
+				{ "comment": "key", "include": "#value" },
+				{ "include": "#punctuation-comma" },
+				{ "include": "#punctuation-colon" }
+			]
+		},
+		"object": {
+			"name": "meta.structure.object.msl",
+			"comment": "slightly wrong, because we aren't parsing keys&values as separate things",
+			"begin": "(?x:(\\w|&)(\\w|!|\\.|-|<|>|\\\\|\\/|_)*\\()",
+			"beginCaptures": {
+				"0": {"name":"punctuation.definition.object.begin.msl" }
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {"name":"punctuation.definition.object.end.msl" }
 			},
 			"patterns": [
 				{ "comment": "key", "include": "#simple_string_key" },
