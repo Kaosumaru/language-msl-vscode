@@ -2,6 +2,7 @@
     "name": "msl",
     "displayName": "MSL",
     "description": "",
+    "publisher": "Mateusz-Borycki",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.37.0"
