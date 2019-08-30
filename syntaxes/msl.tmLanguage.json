@@ -8,7 +8,7 @@
 	],
 	"repository": {
 		"value": {
-			"patterns": [{ "include": "#object" }, { "include": "#dictionary" }, { "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }]
+			"patterns": [{ "include": "#object" }, { "include": "#dictionary" }, { "include": "#constant" }, { "include": "#number" }, { "include": "#simple_string" }, { "include": "#string" }, { "include": "#array" }, { "include": "#comments" }]
 		},
 		"simple_string": {
 			"name": "string.unquoted.msl",
@@ -93,6 +93,39 @@
 				{ "comment": "key", "include": "#value" },
 				{ "include": "#punctuation-comma" },
 				{ "include": "#punctuation-colon" }
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"begin": "/\\*\\*(?!/)",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.msl"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.documentation.msl"
+				},
+				{
+					"begin": "/\\*",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.msl"
+						}
+					},
+					"end": "\\*/",
+					"name": "comment.block.msl"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.msl"
+						}
+					},
+					"match": "(//).*$\\n?",
+					"name": "comment.line.double-slash.js"
+				}
 			]
 		},
 		"constant": {
