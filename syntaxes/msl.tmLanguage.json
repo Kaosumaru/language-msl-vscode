@@ -16,7 +16,7 @@
 		},
 		"simple_string_key": {
 			"comment": "simple string as key in object",
-			"name": "support.type.property-name.msl",
+			"name": "support.type.property-name.simple.string.msl",
 			"match": "(?x:(\\w|&)(\\w|!|\\.|-|<|>|\\\\|\\/|_)*:)"
 		},
 		"string": {
@@ -25,21 +25,14 @@
 			"end": "\"",
 			"patterns": [
 				{
-					"name": "constant.character.escape.msl",
+					"name": "constant.character.escape.simple.msl",
 					"match": "\\\\."
 				}
 			]
 		},
 		"string_key": {
-			"name": "support.type.property-name.msl",
-			"begin": "\"",
-			"end": "\":",
-			"patterns": [
-				{
-					"name": "constant.character.escape.msl",
-					"match": "\\\\."
-				}
-			]
+			"name": "support.type.property-name.string.msl",
+			"match": "(?x:\"(\\s|\\w|!|\\.|-|<|>|\\\\|\\/|_)*\":)"
 		},
 
 		"array": {
